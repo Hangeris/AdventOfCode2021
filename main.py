@@ -6,19 +6,21 @@ def main():
 
     depth = 0
     position = 0
+    aim = 0
 
     for line in input_lines:
         dir = line.split(" ")[0]
         amount = int(line.split(" ")[1])
 
         if dir == "up":
-            depth -= amount
+            aim -= amount
 
         elif dir == "down":
-            depth += amount
+            aim += amount
 
         elif dir == "forward":
             position += amount
+            depth += aim * amount
 
 
 

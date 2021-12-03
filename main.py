@@ -7,35 +7,63 @@ def main():
     input_lines = read_file_lines()
 
     datas = []
+    datas2 = []
     for line in input_lines:
         data = Data(line, int(line, 2))
         datas.append(data)
+        datas2.append(data)
 
-
-    gamma_decimal = 0
+    #oxygen generator rating
     bit_length = len(data.decimal_string)
-    for i in range(0, bit_length):
-        shifted_decimal = 1 << i
+    for i in range(0, bit_length): 
+        shifted_decimal = 1 << ((bit_length-1) - i)
 
-        has = 0
-        have_not = 0
+        data_has = []
+        data_has_not = []
 
         for data in datas:
             if (data.decimal & shifted_decimal == shifted_decimal):
-                has += 1
+                data_has.append(data)
             else:
-                have_not += 1
+                data_has_not.append(data)
 
-        if (has > have_not):
-            gamma_decimal += shifted_decimal
+        if (len(data_has) >= len(data_has_not)):
+            datas = [ele for ele in datas if ele not in data_has_not]
+        else:
+            datas = [ele for ele in datas if ele not in data_has]
 
+        if len(datas) == 1:
+            break
 
-    bit_length_decimal = (1 << bit_length) - 1
+    #CO2 scrubber rating
+    for i in range(0, bit_length): 
+        shifted_decimal = 1 << ((bit_length-1) - i)
+
+        data_has = []
+        data_has_not = []
+
+        for data in datas2:
+            if (data.decimal & shifted_decimal == shifted_decimal):
+                data_has.append(data)
+            else:
+                data_has_not.append(data)
+
+        if (len(data_has_not) <= len(data_has)):
+            datas2 = [ele for ele in datas2 if ele not in data_has]
+        else:
+            datas2 = [ele for ele in datas2 if ele not in data_has_not]
+
+        if len(datas2) == 1:
+            break
+
+    bit_length_decimal = (1 << bit_length)
     print("bitLength count: {}".format(bit_length))
     print("bitLength in decimal: {}".format(bit_length_decimal))
-    print("gamma decimal: {}".format(gamma_decimal))
-    print("epsilon rate: {}".format(int(bit_length_decimal)-gamma_decimal))
-    print(gamma_decimal * ((bit_length_decimal)-gamma_decimal))
+    oxygen_generator_rating = datas[0].decimal
+    co2_scrubber_rating = datas2[0].decimal
+    print(oxygen_generator_rating)
+    print(co2_scrubber_rating)
+    print(oxygen_generator_rating * co2_scrubber_rating)
 
     
 

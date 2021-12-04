@@ -78,18 +78,29 @@ def main():
         
         board.add_row(line)
   
+    completed_boards = []
+
     for drawn_number in drawn_numbers:
         for board in boards:
             board.mark_number(drawn_number)
+            if (board.is_complete() and not completed_boards.__contains__(board)):
+                completed_boards.append(board)
+
+        completed_amount = 0
+        for board in boards:
             if board.is_complete():
-                board.show()
-                sum = board.find_unmarked_sum()
-                print("answer: {}".format(sum * drawn_number))
-                return
+                completed_amount += 1
+
+        if completed_amount == len(boards):
+            print("all boards are completed, on number " + str(drawn_number))
+            completed_boards[-1].show()
+            print(completed_boards[-1].find_unmarked_sum() * drawn_number)
+            return
 
 
 def read_file_lines():
     return open('input.txt', 'r', encoding='utf-8-sig').read().splitlines()
+
 
 if __name__ == "__main__":
     main()

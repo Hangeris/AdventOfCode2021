@@ -74,7 +74,7 @@
       <updated>1638373062400</updated>
       <workItem from="1638373065152" duration="534000" />
       <workItem from="1638373700878" duration="779000" />
-      <workItem from="1638719689203" duration="6227000" />
+      <workItem from="1638719689203" duration="7267000" />
     </task>
     <task id="LOCAL-00001" summary="Init 2">
       <created>1638373857106</created>
@@ -105,16 +105,5 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Init 2" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

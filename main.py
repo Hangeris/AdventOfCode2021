@@ -1,11 +1,13 @@
 import sys
 
-class LanternFish:
-    def __init__(self, starting_day):
+class LanternFishStack:
+    def __init__(self, starting_day, amount):
         self.health = starting_day
+        self.amount = amount
 
     def decrease(self):
         self.health -= 1
+    
 
 def main():
     input_lines = read_file_lines()
@@ -13,33 +15,40 @@ def main():
     fishes = []
     input_in_days = input_lines[0].split(',')
     for input_in_day in input_in_days:
-        fishes.append(LanternFish(int(input_in_day)))
+        fishes.append(LanternFishStack(int(input_in_day), 1))
 
     show(fishes)
-    upcoming_fishes = []
+    amount = 0
     
-    for i in range(0, 80):
+    for i in range(0, 256):
         for fish in fishes:
             if fish.health <= 0:
-                upcoming_fishes.append(LanternFish(8))
+                amount += fish.amount
                 fish.health = 6
             else:
                 fish.health -= 1
 
-        fishes.extend(upcoming_fishes)
-        upcoming_fishes = []
+        if amount != 0:
+            fishes.append(LanternFishStack(8, amount))
+            amount = 0
+            
         #show(fishes)
     
-    print(len(fishes))
+    answer = 0
+    for fish in fishes:
+        answer += fish.amount
+    print(answer)
+
 
 def show(fishes):
     for fish in fishes:
-        sys.stdout.write("{},".format(fish.health))
+        sys.stdout.write("{}({}),".format(fish.health, fish.amount))
     print()
         
 
 def read_file_lines():
     return open('input.txt', 'r', encoding='utf-8-sig').read().splitlines()
+
 
 if __name__ == "__main__":
     main()

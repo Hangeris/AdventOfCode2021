@@ -127,3 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea/.idea.AdventOfCode2021.dir/.idea/workspace.xml

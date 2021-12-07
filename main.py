@@ -23,7 +23,15 @@ def main():
 def find_fuel_cost(input_numbers, x):
     sum = 0
     for num in input_numbers:
-        sum += abs(num - x)
+        temp_sum = 0
+        # 5 - 2 = 3 (6)
+        # 5 - 1 = 4 (10)
+        # 5 - 0 = 5 (15)
+        dif = abs(num - x)
+        for i in range(0, dif):
+            temp_sum += (i+1)
+        
+        sum += temp_sum
         
     return sum
 
